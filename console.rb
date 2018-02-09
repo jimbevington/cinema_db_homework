@@ -11,10 +11,12 @@ Customer.delete_all()
 customer1 = Customer.new({ 'name' => 'Larry David', 'funds' => 100 })
 customer2 = Customer.new({ 'name' => 'Elon Musk', 'funds' => 50 })
 customer3 = Customer.new({ 'name' => 'Mahatma Gandhi', 'funds' => 250 })
+customer4 = Customer.new({ 'name' => 'Karen Dunbar', 'funds' => 175 })
 
 customer1.save()
 customer2.save()
 customer3.save()
+customer4.save()
 
 film1 = Film.new({ 'title' => 'The Human Centipede VII', 'price' => 10 })
 film2 = Film.new({ 'title' => 'Cool Runnings', 'price' => 15 })
@@ -30,8 +32,9 @@ ticket3 = Ticket.new({ 'customer_id' => customer2.id, 'film_id' => film3.id })
 ticket4 = Ticket.new({ 'customer_id' => customer1.id, 'film_id' => film2.id })
 ticket5 = Ticket.new({ 'customer_id' => customer2.id, 'film_id' => film2.id })
 ticket6 = Ticket.new({ 'customer_id' => customer3.id, 'film_id' => film3.id })
+ticket7 = Ticket.new({ 'customer_id' => customer4.id, 'film_id' => film1.id })
 
-for ticket in [ticket1, ticket2, ticket3, ticket4, ticket5, ticket6]
+for ticket in [ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7]
   ticket.save()
 end
 
