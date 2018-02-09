@@ -24,6 +24,8 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
+  def 
+
   def self.all()
     sql = "SELECT * FROM customers"
     customers = SqlRunner.run(sql)
