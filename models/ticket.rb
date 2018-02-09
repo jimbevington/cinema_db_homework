@@ -18,6 +18,21 @@ class Ticket
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
+  # RETURN film's price for UPDATE_CUSTOMER_FUNDS() below
+  def get_film_price
+    sql = "SELECT price FROM films WHERE id = $1"
+    values = [@film_id]
+    price = SqlRunner.run(sql, values)[0]['price']
+    return price.to_i
+  end
+
+  def update_customer_funds
+    deduction = get_film_price()
+    sql = "UPDATE customers SET funds = (funds - $1) WHERE id = $2"
+    values = [deduction, @customer_id]
+    SqlRunner.run(sql, values)
+  end
+
   def update
     sql = "UPDATE tickets SET (customer_id, film_id) = ($1, $2) WHERE id = $3"
     values = [@customer_id, @film_id, @id]
