@@ -7,7 +7,7 @@ require_relative('./models/screening.rb')
 
 Film.delete_all()
 Customer.delete_all()
-# don't need to delete tickets, as delete cascades from film/customerss
+# don't need to delete tickets/screens, as delete cascades from film/customerss
 
 customer1 = Customer.new({ 'name' => 'Larry David', 'funds' => 100 })
 customer2 = Customer.new({ 'name' => 'Elon Musk', 'funds' => 50 })
@@ -27,11 +27,11 @@ film1.save()
 film2.save()
 film3.save()
 
-screening1 = Screening.new({ 'screening_time' => '15:40', 'film_id' => film1.id})
-screening2 = Screening.new({ 'screening_time' => '19:00', 'film_id' => film1.id})
-screening3 = Screening.new({ 'screening_time' => '13:00', 'film_id' => film2.id})
-screening4 = Screening.new({ 'screening_time' => '23:00', 'film_id' => film2.id})
-screening5 = Screening.new({ 'screening_time' => '17:00', 'film_id' => film3.id})
+screening1 = Screening.new({ 'screening_time' => '1540', 'film_id' => film1.id})
+screening2 = Screening.new({ 'screening_time' => '1900', 'film_id' => film1.id})
+screening3 = Screening.new({ 'screening_time' => '1300', 'film_id' => film2.id})
+screening4 = Screening.new({ 'screening_time' => '2300', 'film_id' => film2.id})
+screening5 = Screening.new({ 'screening_time' => '1700', 'film_id' => film3.id})
 
 for screening in [screening1, screening2, screening3, screening4, screening5]
   screening.save()
