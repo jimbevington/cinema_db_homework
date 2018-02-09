@@ -24,6 +24,24 @@ class Ticket
     SqlRunner.run(sql, values)
   end
 
+  def delete()
+    sql = "DELETE FROM tickets WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM tickets WHERE id = $1"
+    values = [id]
+    tickets = SqlRunner.run(sql, values)
+    ticket_array = tickets.map{|ticket| Ticket.new(ticket) }
+    if ticket_array.length > 0
+      return ticket_array[0]
+    else
+      return "Ticket does not exist"
+    end
+  end
+
   def self.all()
     sql = "SELECT * FROM tickets"
     tickets = SqlRunner.run(sql)

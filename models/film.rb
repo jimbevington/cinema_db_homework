@@ -24,6 +24,24 @@ class Film
     SqlRunner.run(sql, values)
   end
 
+  def delete()
+    sql = "DELETE FROM films WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM films WHERE id = $1"
+    values = [id]
+    films = SqlRunner.run(sql, values)
+    film_array = films.map{|film| Film.new(film) }
+    if film_array.length > 0
+      return film_array[0]
+    else
+      return "Film does not exist."
+    end
+  end
+
   def self.all()
     sql = "SELECT * FROM films"
     films = SqlRunner.run(sql)

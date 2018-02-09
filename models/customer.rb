@@ -24,7 +24,25 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
-  def 
+  def delete()
+    sql = "DELETE FROM customers WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM customers WHERE id = $1"
+    values = [id]
+    customers = SqlRunner.run(sql, values)
+    # map customers into an array of objects
+    cust_array = customers.map{|customer| Customer.new(customer)}
+    # return customer or warn that it doesn't exist.
+    if cust_array.length > 0
+      return customers[0]
+    else
+      return "Customer does not exist."
+    end
+  end
 
   def self.all()
     sql = "SELECT * FROM customers"
