@@ -51,3 +51,9 @@ end
 
 binding.pry
 nil
+
+#### TO DO: films.screenings
+            # add screening id to tickets
+            # screening.tickets
+            # do most popular screening function, most tix sold
+            # limit availabe tickets per screening
