@@ -38,6 +38,11 @@ class Film
     return customers.map{|customer| Customer.new(customer) }
   end
 
+  def num_customers()
+    customers = customers()
+    return customers.length
+  end
+
   def self.find_by_id(id)
     sql = "SELECT * FROM films WHERE id = $1"
     values = [id]
