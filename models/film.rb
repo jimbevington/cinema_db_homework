@@ -43,6 +43,13 @@ class Film
     return customers.length
   end
 
+  def screenings()
+    sql = "SELECT * FROM screenings WHERE film_id = $1"
+    values = [@id]
+    screenings = SqlRunner.run(sql, values)
+    return screenings.map{|screening| Screening.new(screening)}
+  end
+
   def self.find_by_id(id)
     sql = "SELECT * FROM films WHERE id = $1"
     values = [id]
