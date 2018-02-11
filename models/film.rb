@@ -50,6 +50,8 @@ class Film
     return screenings.map{|screening| Screening.new(screening)}
   end
 
+  # THIS IS A VERY VERBOSE WAY OF DOING THIS, I'M SURE THERES A MORE ELEGANT
+  # VERSION THAT A LESS TIRED ME COULD FIND.
   def most_popular_screening
     screenings = screenings()
     ticket_count = []
@@ -62,7 +64,7 @@ class Film
     end
     # find biggest ticket count
     most_tickets = ticket_count.max
-    # find index of that ticket count
+    # find index with the biggest ticket count
     most_pop_index = ticket_count.index(most_tickets)
     # return the screening at that index
     return screenings[most_pop_index]
