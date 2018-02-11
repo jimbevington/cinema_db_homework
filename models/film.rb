@@ -50,6 +50,24 @@ class Film
     return screenings.map{|screening| Screening.new(screening)}
   end
 
+  def most_popular_screening
+    screenings = screenings()
+    ticket_count = []
+    for s in screenings
+      sql = "SELECT * FROM tickets WHERE screening_id = $1"
+      values = [s.id]
+      result = SqlRunner.run(sql, values)
+      tickets = result.map{|ticket| Ticket.new(ticket)}
+      ticket_count.push(tickets.length)
+    end
+    # find biggest ticket count
+    most_tickets = ticket_count.max
+    # find index of that ticket count
+    most_pop_index = ticket_count.index(most_tickets)
+    # return the screening at that index
+    return screenings[most_pop_index]
+  end
+
   def self.find_by_id(id)
     sql = "SELECT * FROM films WHERE id = $1"
     values = [id]
