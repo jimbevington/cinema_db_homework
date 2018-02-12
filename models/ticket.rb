@@ -37,7 +37,7 @@ class Ticket
       # take ticket away from Screenings available tickets
       reduce_available_tickets()
     else
-      
+      # alert user that there are no tickets left
       return "No tickets available."
     end
   end
