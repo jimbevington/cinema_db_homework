@@ -50,26 +50,6 @@ class Film
     return screenings.map{|screening| Screening.new(screening)}
   end
 
-  # THIS IS A VERY VERBOSE WAY OF DOING THIS, I'M SURE THERES A MORE ELEGANT
-  # VERSION THAT A LESS TIRED ME COULD FIND.
-  # def most_popular_screening
-  #   screenings = screenings()
-  #   ticket_count = []
-  #   for s in screenings
-  #     sql = "SELECT * FROM tickets WHERE screening_id = $1"
-  #     values = [s.id]
-  #     result = SqlRunner.run(sql, values)
-  #     tickets = result.map{|ticket| Ticket.new(ticket)}
-  #     ticket_count.push(tickets.length)
-  #   end
-  #   # find biggest ticket count
-  #   most_tickets = ticket_count.max
-  #   # find index with the biggest ticket count
-  #   most_pop_index = ticket_count.index(most_tickets)
-  #   # return the screening at that index
-  #   return screenings[most_pop_index]
-  # end
-
   def most_popular_screening
     # create some empty vars
     most_popular_indices = []
@@ -77,6 +57,7 @@ class Film
     ticket_count = []
     # get all the screening objects for that film
     screenings = screenings()
+    # fill ticket_count with number of ticket
     for s in screenings
       sql = "SELECT * FROM tickets WHERE screening_id = $1"
       values = [s.id]

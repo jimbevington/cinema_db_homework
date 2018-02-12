@@ -49,10 +49,8 @@ for ticket in [ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7]
   ticket.save()
 end
 
+### COULD REDESIGN MOST POPULAR SCREENING FUNCTION with Screenings Tickets Sold field, and rearrange methods so objects are updating themselves.
+
+
 binding.pry
 nil
-
-#### TO DO: films.screenings
-
-            # do most popular screening function, most tix sold
-            # limit availabe tickets per screening

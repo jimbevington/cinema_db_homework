@@ -10,6 +10,7 @@ class Screening
     @screening_time = options['screening_time']
     @film_id = options['film_id']
     @tickets_available = options['tickets_available']
+    @tickets_sold = options['tickets_sold']
   end
 
   def save
