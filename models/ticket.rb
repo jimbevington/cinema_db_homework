@@ -12,11 +12,34 @@ class Ticket
     @screening_id = options['screening_id']
   end
 
+  # return true or false
+  def check_availability
+    sql = "SELECT * FROM screenings WHERE id = $1"
+    values = [@screening_id]
+    result = SqlRunner.run(sql, values)
+    screenings = result.map{|ticket| Screening.new(ticket)}
+    return screenings[0].tickets_available.to_i > 0
+  end
+
+  def reduce_available_tickets
+    sql = "UPDATE screenings SET tickets_available = (tickets_available -1)
+           WHERE id = $1"
+    values = [@screening_id]
+    SqlRunner.run(sql, values)
+  end
+
   def save()
-    sql = "INSERT INTO tickets (customer_id, film_id, screening_id)
-           VALUES ($1, $2, $3) RETURNING id"
-    values = [@customer_id, @film_id, @screening_id]
-    @id = SqlRunner.run(sql, values)[0]['id'].to_i
+    if check_availability() # if there are tickets available
+      sql = "INSERT INTO tickets (customer_id, film_id, screening_id)
+             VALUES ($1, $2, $3) RETURNING id"
+      values = [@customer_id, @film_id, @screening_id]
+      @id = SqlRunner.run(sql, values)[0]['id'].to_i
+      # take ticket away from Screenings available tickets
+      reduce_available_tickets()
+    else
+      
+      return "No tickets available."
+    end
   end
 
   # RETURN film's price for UPDATE_CUSTOMER_FUNDS() below
