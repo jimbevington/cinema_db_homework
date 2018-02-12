@@ -18,7 +18,8 @@ CREATE TABLE films(
 CREATE TABLE screenings(
   id SERIAL PRIMARY KEY,
   screening_time TIME, -- should this be an INT
-  film_id INT REFERENCES films(id) ON DELETE CASCADE
+  film_id INT REFERENCES films(id) ON DELETE CASCADE,
+  tickets_available INT
 );
 
 CREATE TABLE tickets(

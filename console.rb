@@ -27,11 +27,11 @@ film1.save()
 film2.save()
 film3.save()
 
-screening1 = Screening.new({ 'screening_time' => '1540', 'film_id' => film1.id})
-screening2 = Screening.new({ 'screening_time' => '1900', 'film_id' => film1.id})
-screening3 = Screening.new({ 'screening_time' => '1300', 'film_id' => film2.id})
-screening4 = Screening.new({ 'screening_time' => '2300', 'film_id' => film2.id})
-screening5 = Screening.new({ 'screening_time' => '1700', 'film_id' => film3.id})
+screening1 = Screening.new({ 'screening_time' => '1540', 'film_id' => film1.id, 'tickets_available' => 5})
+screening2 = Screening.new({ 'screening_time' => '1900', 'film_id' => film1.id, 'tickets_available' => 8})
+screening3 = Screening.new({ 'screening_time' => '1300', 'film_id' => film2.id, 'tickets_available' => 10})
+screening4 = Screening.new({ 'screening_time' => '2300', 'film_id' => film2.id, 'tickets_available' => 4})
+screening5 = Screening.new({ 'screening_time' => '1700', 'film_id' => film3.id, 'tickets_available' => 15})
 
 for screening in [screening1, screening2, screening3, screening4, screening5]
   screening.save()
